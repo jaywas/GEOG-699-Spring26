@@ -1,2 +1,1 @@
-Lab 4
-![alt text](image.png)
+# GEOG-699-Spring26
