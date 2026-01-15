@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>College Station Weekly Temperature Forecast</title>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <style>
+        body {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                "Apple Color Emoji",
+                "Segoe UI Emoji",
+                "Segoe UI Symbol",
+                sans-serif;
+            background: var(--highcharts-background-color);
+            color: var(--highcharts-neutral-color-100);
+        }
+
+        #container {
+            height: 400px;
+        }
+
+        .highcharts-figure,
+        .highcharts-data-table table {
+            min-width: 310px;
+            max-width: 800px;
+            margin: 1em auto;
+        }
+
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid var(--highcharts-neutral-color-10, #e6e6e6);
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: var(--highcharts-neutral-color-60, #666);
+        }
+
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
+
+        .highcharts-data-table td,
+        .highcharts-data-table th,
+        .highcharts-data-table caption {
+            padding: 0.5em;
+        }
+
+        .highcharts-data-table thead tr,
+        .highcharts-data-table tbody tr:nth-child(even) {
+            background: var(--highcharts-neutral-color-3, #f7f7f7);
+        }
+
+        .highcharts-description {
+            margin: 0.3rem 10px;
+        }
+    </style>
+</head>
+<body>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        College Station weekly temperature forecast. The shaded band shows the
+        daily low–high temperature range, and the line shows the average
+        temperature for each day.
+    </p>
+</figure>
+
+<script>
+    var ranges = [
+        [67, 82],
+        [59, 81], 
+        [50, 81], 
+        [47, 70], 
+        [51, 77], 
+        [60, 78], 
+        [66, 79], 
+        [66, 80]  
+    ];
+
+    var averages = [
+        (67 + 82) / 2, 
+        (59 + 81) / 2, 
+        (50 + 81) / 2, 
+        (47 + 70) / 2, 
+        (51 + 77) / 2, 
+        (60 + 78) / 2, 
+        (66 + 79) / 2, 
+        (66 + 80) / 2  
+    ];
+
+    Highcharts.chart('container', {
+        title: {
+            text: 'College Station Weekly Temperature Forecast',
+            align: 'left'
+        },
+
+        subtitle: {
+            text: 'Daily high–low temperature range with average temperature (°F)',
+            align: 'left'
+        },
+
+        xAxis: {
+            categories: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            title: {
+                text: 'Day of Week'
+            }
+        },
+
+        yAxis: {
+            title: {
+                text: 'Temperature (°F)'
+            }
+        },
+
+        tooltip: {
+            shared: true,
+            valueSuffix: ' °F'
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        series: [{
+            name: 'Temperature range',
+            type: 'arearange',
+            data: ranges,
+            lineWidth: 0,
+            fillOpacity: 0.3,
+            zIndex: 0,
+            marker: {
+                enabled: false
+            }
+        }, {
+            name: 'Average temperature',
+            type: 'line',
+            data: averages,
+            zIndex: 1,
+            marker: {
+                enabled: true
+            }
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>
